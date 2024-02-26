@@ -282,3 +282,8 @@ int main()
 
     return 0;
 }
+
+/**
+ * Circular Linked list
+ * tail->next = head; 
+*/

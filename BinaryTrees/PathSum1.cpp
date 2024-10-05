@@ -26,6 +26,8 @@ Constraints:
 The number of nodes in the tree is in the range [0, 5000].
 -1000 <= Node.val <= 1000
 -1000 <= targetSum <= 1000
+
+TIME COMPLEXITY - O(N)
 */
 
 #include<iostream>
@@ -46,6 +48,7 @@ using namespace std;
 class Solution {
 public:
 // sum is pass by value
+// Pre Order Traversal N L R
     void solve(TreeNode* root, int targetSum, int sum, bool& status)
     {
         
@@ -54,6 +57,7 @@ public:
             return;
         }
 
+        // N
         // root not null
         sum = sum + root->val;
         
@@ -67,7 +71,9 @@ public:
             }
         }
 
+        // L 
         solve(root->left, targetSum, sum, status);
+        // T
         solve(root->right, targetSum, sum, status);
     }
 

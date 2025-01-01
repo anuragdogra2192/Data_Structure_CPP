@@ -100,46 +100,42 @@ void levelOrderTraversal(Node* root)
         }
     }
 }
-//Time Complexity fo getMin() and getMax() is O(H) where H is the height of the tree.
-//In the worst case, the height of the tree can be N. So, the worst case time complexity of getMin() and getMax() is O(N).
-int getMin(Node* root)
-{
-    if (root == NULL)
-    {
-        return -1;
-    }
-    
-    while(root->left != NULL)
-    {
-        root = root->left;
-    }
-    // Now we have reached the leftmost node
-    return root->data;
-}
 
-int getMax(Node* root)
+//Searching a given element in BST 
+//Time Complexity: O(logN) - Average Case, O(N) - Worst Case
+bool searchBST(Node* root, int target)
 {
     if(root == NULL)
     {
-        return -1;
+        return false;
     }
-
-    while(root->right !=NULL)
+    if(root->data == target)
     {
-        root = root->right;
+        return true;
     }
-    // Now we have reached the rightmost node
-    return root->data;
-}
+    else if(target < root->data)
+    {
+        return searchBST(root->left, target);
+    }
+    else //if(target > root)
+    {
+        return searchBST(root->right, target);
+    }
 
+    return false;
+}
 
 int main()
 {
-    Node* root = NULL; //Empty Tree, the line Node* root = NULL; does not call any constructor. It simply declares a pointer to a Node object and initializes it to NULL
+    Node* root = NULL;
     createTree(root);
+    //100 90 500 80 400 70 85 300 450 470 -1                               
     levelOrderTraversal(root);
     cout<<endl;
-    cout<<"The minimum element in the BST is: "<<getMin(root)<<endl;
-    cout<<"The maximum element in the BST is: "<<getMax(root)<<endl;
+    cout<<searchBST(root, 450);
+    cout<<endl;
+    cout<<searchBST(root, 510);
+    cout<<endl;
+
     return 0;
 }

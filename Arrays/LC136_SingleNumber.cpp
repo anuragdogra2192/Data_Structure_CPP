@@ -51,3 +51,5 @@ public:
         return ans;
     }
 };
+
+//https://florian.github.io//xor-trick/

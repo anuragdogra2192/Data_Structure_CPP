@@ -1,5 +1,5 @@
 #include<iostream>
-
+//TC O(N)
 using namespace std;
 
 void input(int arr[], int size)
@@ -27,7 +27,7 @@ int main()
     int arr[100];
     int size;
     cout<<"Enter the size of array: ";
-    cin>>size;
+    cin>>size;//Bad practice
     int target = 100;
     input(arr, size);
     bool found = false;

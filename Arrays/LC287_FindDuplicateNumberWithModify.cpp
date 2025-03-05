@@ -1,4 +1,4 @@
-/*
+/* IN this appraoch we have modified the array.
 287. Find the Duplicate Number
 
 Given an array of integers nums containing n + 1 integers where each integer 
@@ -36,7 +36,10 @@ Follow up:
 How can we prove that at least one duplicate number must exist in nums?
 Can you solve the problem in linear runtime complexity?
 */
+#include<iostream>
+#include<vector>
 
+using namespace std;
 class Solution {
 public:
     //Time Complexity: O(n)
@@ -57,5 +60,15 @@ public:
                 ans = index;
         }
         return ans;
+    }
+
+    //Other aproach Time Complexity O(n)
+    int findDuplicateOther(vector<int>& nums) {
+        //Swapping to zeroth pos
+        while(nums[0] != nums[nums[0]])
+        {
+            swap(nums[0], nums[nums[0]]);
+        }
+        return nums[0];
     }
 };

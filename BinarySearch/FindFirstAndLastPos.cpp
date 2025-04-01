@@ -104,5 +104,8 @@ public:
         
         vector<int> pos{firstIndex, lastIndex};
         return pos;
+        //Note:
+        //Formula to get total occurences of a target 
+        //Total occurrence = lastIndex - firstIndex + 1;
     }
-};
+}; 

@@ -49,14 +49,14 @@ s and t consist of any valid ascii character.
 #include<iostream>
 #include<string>
 using namespace std;
-
+//Time
 class Solution {
     public:
         bool isIsomorphic(string s, string t) {
             //Map the chars of s to t
             char map_s_t[256]={0};
             bool is_t_CharMapped[256];//This is for the case: baba -> badc
-            string ans;
+            
             for(int i = 0; i<s.length(); i++)
             {
                 if((is_t_CharMapped[t[i]] ==  false) && (map_s_t[s[i]] == 0))

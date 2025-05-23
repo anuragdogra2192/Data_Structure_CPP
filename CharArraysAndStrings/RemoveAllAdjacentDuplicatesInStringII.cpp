@@ -82,6 +82,7 @@ class Solution {
         string removeDuplicatesMethod2(string s, int k) {
             //Two pointer approach -
             //Time complexity: O(N)
+            //Space Complexity: O(N)
             //Incredible
             /* Steps:
             1) s[i] = s[j]

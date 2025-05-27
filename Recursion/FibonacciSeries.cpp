@@ -45,3 +45,4 @@ int main()
     cout<<"Fibonacci to nth is: "<< fib(n)<<endl;
     return 0;
 }
+//Time complexity - O(2^N)

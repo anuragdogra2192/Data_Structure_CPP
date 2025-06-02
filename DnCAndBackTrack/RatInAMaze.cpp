@@ -89,7 +89,7 @@ class Solution {
               
               int dr[] = {-1, 1, 0, 0};
               int dc[] = {0, 0, -1, 1};  
-              string move = {'U', 'D', 'L', 'R'};
+              char move[] = {'U', 'D', 'L', 'R'};
 
               for(int i = 0; i<4; i++)
               {

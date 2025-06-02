@@ -79,57 +79,83 @@ class Solution {
                   ans.push_back(output);
                   return;
               }
+
               //1K case mein solve karunga 
+              
               //1 case -  Movement kaise hoti hai
+              //    Up  Down    Left    Right
+              //dr  -1   +1      0       0
+              //dc   0    0     -1      +1
+              
+              int dr[] = {-1, 1, 0, 0};
+              int dc[] = {0, 0, -1, 1};  
+              string move = {'U', 'D', 'L', 'R'};
+
+              for(int i = 0; i<4; i++)
+              {
+                int new_r = src_r + dr[i];
+                int new_c = src_c + dc[i];
+                if(isSafe(new_r, new_c, maze, visited))
+                {
+                  visited[new_r][new_c] = true;
+                  //Baaki recursion shambhal lega
+                  solve(maze, visited, ans, output+move[i], new_r, new_c, dest_r, dest_c);
+                  //Wapas aake visited ko revert karna padega
+                  //Yeah hai backtracking
+                  visited[new_r][new_c] = false;
+                }
+              }
+
               //Up
-              int new_r = src_r - 1;
-              int new_c = src_c;
-              if(isSafe(new_r, new_c, maze, visited))
-              {
-                  visited[new_r][new_c] = true;
-                  //Baaki recursion shambhal lega
-                  solve(maze, visited, ans, output+'U',new_r, new_c, dest_r, dest_c);
-                  //Wapas aake visited ko revert karna padega
-                  //Yeah hai backtracking
-                  visited[new_r][new_c] = false;
-              }
+            //   int new_r = src_r - 1;
+            //   int new_c = src_c;
+            //   if(isSafe(new_r, new_c, maze, visited))
+            //   {
+            //       visited[new_r][new_c] = true;
+            //       //Baaki recursion shambhal lega
+            //       solve(maze, visited, ans, output+'U',new_r, new_c, dest_r, dest_c);
+            //       //Wapas aake visited ko revert karna padega
+            //       //Yeah hai backtracking
+            //       visited[new_r][new_c] = false;
+            //   }
               //Down
-              new_r = src_r + 1;
-              new_c = src_c;
-              if(isSafe(new_r, new_c, maze, visited))
-              {
-                  visited[new_r][new_c] = true;
-                  //Baaki recursion shambhal lega
-                  solve(maze, visited, ans, output+'D', new_r, new_c, dest_r, dest_c);
-                  //Wapas aake visited ko revert karna padega
-                  //Yeah hai backtracking
-                  visited[new_r][new_c] = false;
-              }
+            //   new_r = src_r + 1;
+            //   new_c = src_c;
+            //   if(isSafe(new_r, new_c, maze, visited))
+            //   {
+            //       visited[new_r][new_c] = true;
+            //       //Baaki recursion shambhal lega
+            //       solve(maze, visited, ans, output+'D', new_r, new_c, dest_r, dest_c);
+            //       //Wapas aake visited ko revert karna padega
+            //       //Yeah hai backtracking
+            //       visited[new_r][new_c] = false;
+            //   }
               //Left
-              new_r = src_r;
-              new_c = src_c - 1;
-              if(isSafe(new_r, new_c, maze, visited))
-              {
-                  visited[new_r][new_c] = true;
-                  //Baaki recursion shambhal lega
-                  solve(maze, visited, ans, output+'L', new_r, new_c, dest_r, dest_c);
-                  //Wapas aake visited ko revert karna padega
-                  //Yeah hai backtracking
-                  visited[new_r][new_c] = false;
-              }
+            //   new_r = src_r;
+            //   new_c = src_c - 1;
+            //   if(isSafe(new_r, new_c, maze, visited))
+            //   {
+            //       visited[new_r][new_c] = true;
+            //       //Baaki recursion shambhal lega
+            //       solve(maze, visited, ans, output+'L', new_r, new_c, dest_r, dest_c);
+            //       //Wapas aake visited ko revert karna padega
+            //       //Yeah hai backtracking
+            //       visited[new_r][new_c] = false;
+            //   }
               //Right
-              new_r = src_r;
-              new_c = src_c + 1;
-              if(isSafe(new_r, new_c, maze, visited))
-              {
-                  visited[new_r][new_c] = true;
-                  //Baaki recursion shambhal lega
-                  solve(maze, visited, ans, output+'R', new_r, new_c, dest_r, dest_c);
-                  //Wapas aake visited ko revert karna padega
-                  //Yeah hai backtracking
-                  visited[new_r][new_c] = false;
-              }
-          }
+        //       new_r = src_r;
+        //       new_c = src_c + 1;
+        //       if(isSafe(new_r, new_c, maze, visited))
+        //       {
+        //           visited[new_r][new_c] = true;
+        //           //Baaki recursion shambhal lega
+        //           solve(maze, visited, ans, output+'R', new_r, new_c, dest_r, dest_c);
+        //           //Wapas aake visited ko revert karna padega
+        //           //Yeah hai backtracking
+        //           visited[new_r][new_c] = false;
+        //       }
+        }
+        
       vector<string> ratInMaze(vector<vector<int>>& maze) {
           vector<string> ans;
           // code here

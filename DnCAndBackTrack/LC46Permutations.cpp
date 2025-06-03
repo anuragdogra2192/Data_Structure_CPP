@@ -25,7 +25,10 @@ Constraints:
 -10 <= nums[i] <= 10
 All the integers of nums are unique.
 */
-
+/*
+Time Complexity: O(n * n!)
+Space Complexity: O(n * n!) + O(n) ≈ O(n * n!)
+*/
 #include<iostream>
 #include<vector>
 using namespace std;

@@ -19,6 +19,11 @@ Explanation: All elements are identical, so the array remains unchanged.
 Constraints:
 1 <= arr.size() <= 105
 1 <= arr[i] <= 105
+
+Time Complexity - avg case, O(nlogn) and best case too
+                - worst case O(n^2); decreasing order array
+                - Big O(n^2)
+
 */
 
 #include<vector>

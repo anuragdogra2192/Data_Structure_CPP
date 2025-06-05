@@ -24,12 +24,28 @@ void printPermutation(string& str, int i)
     }
 }
 
+void permuteWithSTL(string& str) 
+{
+    //To get all permuations we need a sorted error
+    //because nextPermutation_stl function returns
+    //the next lexicographically order.
+    
+    sort(str.begin(), str.end());
+    cout<<str<<endl; //Original
+    while(next_permutation(str.begin(), str.end())) //returns bool
+    {
+        cout<<str<<endl;
+    }
+}
+
 int main()
 {
     string str = "abc";
     printPermutation(str, 0);
     string str1 = "xy";
     printPermutation(str1, 0);
+    cout<<"The permute stl"<<endl;
+    permuteWithSTL(str);
     return 0;
 }
 

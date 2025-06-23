@@ -2,23 +2,27 @@
 #include<stack>
 #include<string>
 
-void printReverse(std::string s)
+using namespace std;
+
+void printReverse(string str)
 {
-    std::stack<char> st;
-    
-    for(int i=0; i<s.length(); i++)
+    stack<char> s;
+    //Insert each char in stack
+    for(int i=0; i<str.length(); i++)
     {
-        char ch = s[i];
-        st.push(ch);
+        char ch = str[i];
+        s.push(ch);    
     }
 
-    std::cout<<"Reverse of the given string "<<std::endl;
-    while(!st.empty())
+    //Retrival of char from stack.
+    //And print
+    while(!s.empty())
     {
-        std::cout<<st.top();
-        st.pop();
+        cout<<s.top();
+        s.pop();
     }
-    std::cout<<std::endl;
+
+    cout<<endl;
 }
 
 int main()

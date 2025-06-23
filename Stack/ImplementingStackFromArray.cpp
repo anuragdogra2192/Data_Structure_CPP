@@ -20,7 +20,7 @@ class Stack
     int getTop();
     void push(int data);
     int getSize();
-    void print();
+    void displayStack();
 };
 
 bool Stack::isEmpty()
@@ -76,7 +76,7 @@ int Stack::getSize()
     return top+1;
 }
 
-void Stack::print()
+void Stack::displayStack()
 {
     if(top==-1)
         std::cout<<"The Stack is Empty"<<std::endl;
@@ -103,6 +103,6 @@ int main()
     st.push(90);
     st.push(100);
 
-    st.print();
+    st.displayStack();
     return 0;
 }

@@ -2,7 +2,7 @@
 #include<stack>
 
 using namespace std;
-
+//Time Complexity O(n)
 void insertAtBottom(stack<int>&s, int value)
 {
     //base Case

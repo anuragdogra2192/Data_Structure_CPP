@@ -1,4 +1,5 @@
-/* LEET CODE
+/* LEET CODE 104
+
 104. Maximum Depth of Binary Tree / Height of the Binary Tree
 
 Given the root of a binary tree, return its maximum depth.
@@ -22,6 +23,16 @@ The number of nodes in the tree is in the range [0, 104].
 -100 <= Node.val <= 100
 
 Time Complexity: O(N)
+The space complexity of the maxDepth function is O(h), where h is the height of the binary tree.
+
+This is due to the recursion stack. In the worst case (a skewed tree), the stack can go as deep as the number of nodes (O(n)).
+In the best/average case (a balanced tree), the stack depth is O(log n).
+Summary:
+
+Time Complexity: O(n)
+Space Complexity: O(h), where h is the height of the tree (worst case O(n), best case O(log n))
+
+Dry Run with Post Order to understand
 */
 
 

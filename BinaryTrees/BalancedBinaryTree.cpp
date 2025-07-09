@@ -97,3 +97,29 @@ public:
     }
 
 };
+
+//Optimized and Best&fast way to solve.
+//Time Complexity: O(n)
+class Solution {
+public:
+    int getHeight(TreeNode* root, bool& isBalanced)
+    {
+        if(root == NULL) return 0;
+        int lh = getHeight(root->left, isBalanced);
+        int rh = getHeight(root->right, isBalanced);
+        //check for current node, is it balanced?
+        //by default I assumed that its true.
+        if(isBalanced && abs(lh - rh)>1)
+        {
+            isBalanced = false;
+        }
+        return (max(lh, rh) + 1);
+    }
+
+    bool isBalanced(TreeNode* root) {   
+        if(root == NULL) return true;
+        bool isBalanced = true;
+        int height = getHeight(root, isBalanced);
+        return isBalanced;
+    }
+};

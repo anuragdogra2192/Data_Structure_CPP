@@ -183,6 +183,18 @@ NEXT TOPIC:
     * C) Then put/push its children in the queue 
 */
 
+/*
+The space complexity of void levelOrderTraversal(Node* root) is O(w), where w is the maximum width of the binary tree (the maximum number of nodes at any level).
+
+In the worst case (a complete binary tree), 
+the queue can hold up to O(n/2) = O(n) nodes at the last level.
+So, worst-case space complexity: O(n)
+
+Summary:
+Time Complexity: O(n)
+Space Complexity: O(n) (in the worst case)
+*/
+
 void LevelOrderTraversal(Node* root)
 {
     if(root == NULL)

@@ -1,4 +1,4 @@
-/* LEET CODE
+/* LEET CODE: 236.
 236. Lowest Common Ancestor of a Binary Tree
 Given a binary tree, find the lowest common ancestor (LCA) of two given nodes in the tree.
 
@@ -45,7 +45,7 @@ public:
             return NULL;
         }
 
-        if(root->val == p->val)
+        if(root->val == p->val) //Compare Nodes if values are same.
         {
             return p;
         }

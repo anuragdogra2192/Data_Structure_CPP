@@ -1,5 +1,7 @@
-/* LEET CODE
-112. Path Sum
+/* LEET CODE 112.
+    
+112. Path Sum I
+
 Given the root of a binary tree and an integer targetSum, return true if the tree has a root-to-leaf path such that adding up all the values along the path equals targetSum.
 A leaf is a node with no children.
 

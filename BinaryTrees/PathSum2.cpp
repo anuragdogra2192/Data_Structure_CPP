@@ -1,4 +1,7 @@
-/*
+/*Leet Code 113.
+    
+113. Path Sum II
+
 Given the root of a binary tree and an integer targetSum, 
 return all root-to-leaf paths where the sum of the node values in the path equals targetSum. 
 Each path should be returned as a list of the node values, not node references.
@@ -63,15 +66,15 @@ public:
             {
                 ans.push_back(path);
             }
-            //backtrack
+            //backtrack, before return
             path.pop_back();
-            return;
+            return;//Important, mat bhulna.
         }
 
         solve(root->left, targetSum, sum, path, ans); //L
         solve(root->right, targetSum, sum, path, ans); //R
         
-        //backtrack
+        //backtrack, before return
         path.pop_back();
     }
 

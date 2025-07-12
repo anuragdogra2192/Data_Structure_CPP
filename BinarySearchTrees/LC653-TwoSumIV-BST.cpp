@@ -16,7 +16,7 @@ The number of nodes in the tree is in the range [1, 104].
 root is guaranteed to be a valid binary search tree.
 -105 <= k <= 105
 
-Time Complexity: O(N) - N is the number of nodes in the BST
+Time Complexity: O(N) - N is the number of nodes in the BST + Two pointer O(n)
 Space Complexity: O(N) - N is the number of nodes in the BST
 */
 

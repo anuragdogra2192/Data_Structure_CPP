@@ -1,7 +1,8 @@
 /**
- * @brief LeeeCode 1038. Binary Search Tree to Greater Sum Tree
+ * LeeeCode 1038. Binary Search Tree to Greater Sum Tree
  * 1038. Binary Search Tree to Greater Sum Tree
- 
+ *  Interview question.
+ * Two approaches. Beautiful approach is the second one with RNL.
 Given the root of a Binary Search Tree (BST), convert it to a Greater Tree such that every key of the original BST is changed to the original key plus the sum of all keys greater than the original key in BST.
 
 As a reminder, a binary search tree is a tree that satisfies these constraints:
@@ -25,6 +26,8 @@ All the values in the tree are unique.
 
 Note: This question is the same as 538: https://leetcode.com/problems/convert-bst-to-greater-tree/
 
+Time complexlity: O(n)
+Space Complexity: O(n)
 // Definition for a binary tree node.
 */
 #include<iostream>
@@ -101,6 +104,40 @@ public:
         //Step3: Update tree using inorder
         int index = 0;
         updateTree(root, inorder, index);
+        return root;
+    }
+};
+
+//Beautiful approach: RNL
+//Time compolexity: O(n)
+class Solution {
+public:
+    void RNL(TreeNode* root, int& sum)
+    {
+        if(root == NULL)
+        {
+            return;
+        }
+        //R
+        RNL(root->right, sum);
+        //N
+        sum = sum + root->val; //agge wale nodes ke liye
+        root->val = sum; //Update the val with current sum
+        //L
+        RNL(root->left, sum);
+    }
+
+    TreeNode* bstToGst(TreeNode* root) {
+        if(root == NULL)
+        {
+            return NULL;
+        }
+        if(root->left == NULL && root->right == NULL)
+        {
+            return root;
+        }
+        int sum = 0;
+        RNL(root, sum);
         return root;
     }
 };

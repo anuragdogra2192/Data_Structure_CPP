@@ -1,191 +1,153 @@
-#include<iostream>
-#include<queue>
+/** Leet code 450.
+ * 450. Delete Node in a BST
+ * 
+Given a root node reference of a BST and a key, 
+delete the node with the given key in the BST. 
+Return the root node reference (possibly updated) of the BST.
 
+Basically, the deletion can be divided into two stages:
+
+Search for a node to remove.
+If the node is found, delete the node.
+ 
+
+Example 1:
+Input: root = [5,3,6,2,4,null,7], key = 3
+Output: [5,4,6,2,null,null,7]
+Explanation: Given key to delete is 3. So we find the node with value 3 and delete it.
+One valid answer is [5,4,6,2,null,null,7], shown in the above BST.
+Please notice that another valid answer is [5,2,6,null,4,null,7] and it's also accepted.
+
+Example 2:
+Input: root = [5,3,6,2,4,null,7], key = 0
+Output: [5,3,6,2,4,null,7]
+Explanation: The tree does not contain a node with value = 0.
+Example 3:
+
+Input: root = [], key = 0
+Output: []
+ 
+
+Constraints:
+The number of nodes in the tree is in the range [0, 104].
+-105 <= Node.val <= 105
+Each node has a unique value.
+root is a valid binary search tree.
+-105 <= key <= 105
+ 
+
+Follow up: Could you solve it with time complexity O(height of tree)?
+*/
+#include<iostream>
 using namespace std;
 
-class Node
-{
-    public:
-    int data;
-    Node* left;
-    Node* right;
-
-    Node(int val)
-    {
-        this->data = val;
-        left = NULL;
-        right = NULL;
-    }
+//Definition for a binary tree node.
+struct TreeNode {
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode() : val(0), left(nullptr), right(nullptr) {}
+    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+    TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
 
-Node* buildBST(Node* root, int val)
-{
-    if (root == NULL)
+class Solution {
+public:
+    int getMin(TreeNode* root)
     {
-        root = new Node(val);
-        return root;
-    }
-    else
-    {// Maintaing the BST property
-        if(val < root->data)
-        {//val --> left subtree 
-            root->left = buildBST(root->left, val);
+        if (root == NULL)
+        {
+            return -1;
         }
-        else //val > root->data --> right subtree
+    
+        while(root->left != NULL)
         {
-            root->right = buildBST(root->right, val);
+            root = root->left;
         }
-    }
-    return root;
-}
-
-void createTree(Node*& root)
-{
-    cout <<"Enter the root element of the tree: "<<endl;
-    int val; 
-    cin>>val;
-
-    while(val != -1)
-    {
-        root = buildBST(root, val);
-        cout << "Element to be inserted: "<<endl;
-        cin >> val;
-    }
-}
-
-void levelOrderTraversal(Node* root)
-{
-    if(root == NULL)
-    {
-        return;
+        // Now we have reached the leftmost node
+        return root->val;
     }
 
-    queue<Node*> q;
-    q.push(root);
-    q.push(NULL);
-
-    while(!q.empty())
-    {
-        Node* front = q.front();
-        q.pop();
-        if(front==NULL)
+    int getMax(TreeNode* root)
+    {//Extreme right contains the maximum element
+        if(root == NULL)
         {
-            cout<<endl;
-            if(!q.empty())
-            {
-                q.push(NULL);
-            }
-        }        
-        else //front != NULL 
-        {
-            cout<<front->data<<" ";
-            if(front->left != NULL)
-            {
-                q.push(front->left);
-            }
-            if(front->right !=NULL)
-            {
-                q.push(front->right);
-            }
+            return -1;
         }
-    }
-}
-
-int getMax(Node* root)
-{//Extreme right contains the maximum element
-    if(root == NULL)
-    {
-        return -1;
-    }
-    while(root->right != NULL)
-    {
-        root = root->right;
-    }
-    //Now we are at the rightmost node
-    return root->data;
-}
-
-//Time Complexity of deleteNode() = O(N) - Average Case, O(N^2) - Worst Case
-Node* deleteNode(Node* root, int target)
-{
-    if(root == NULL) return NULL;
-
-    //Node found
-    if(root->data == target)
-    {
-        //Case1 - No children left and right
-        if (root->left == NULL && root->right == NULL)
+        while(root->right != NULL)
         {
-            delete root;
+            root = root->right;
+        }
+        //Now we are at the rightmost node
+        return root->val;
+    }
+
+    TreeNode* deleteNode(TreeNode* root, int key) 
+    {
+       if(root == NULL) 
+       {
             return NULL;
-        }
-        //Case2 - Left child
-        if(root->left != NULL && root->right == NULL)
+       }
+       if(root->val == key)
+       {//Now we need to delete the node
+        //cases:
+        //with 0 child
+        if(root->left == NULL && root->right==NULL)
         {
-            Node* leftNode = root->left;
             delete root;
-            return leftNode; 
+            root = NULL;
+            return root;
         }
-        //Case3 - Right child
+        //with left child only
+        if(root->left != NULL && root->right==NULL)
+        {
+            TreeNode* leftChild = root->left;
+            root->left = NULL;//Isolate 
+            delete root;
+            root = leftChild;
+            return root;
+        }
+        //with right child only
         if(root->left == NULL && root->right != NULL)
         {
-            Node* rightNode = root->right;
+            TreeNode* rightChild = root->right;
+            root->right = NULL;//Isolate 
             delete root;
-            return rightNode;
+            root = rightChild;
+            return root;
         }
-        //Case4 - Both children available
+        //with both left and right child
         if(root->left != NULL && root->right != NULL)
         {   
-            //Predecessor
-            //target node ke left subtree ka maximum element
-            int leftMax = getMax(root->left);
-            root->left = deleteNode(root->left, leftMax);
-            root->data = leftMax;
+            //Predecessor way
+            // //to find root ka just chota element 
+            // int maxVal = getMax(root->left);
+            // //replace root node's value with maxVal
+            // root->val = maxVal;
+            // //delete the actual node
+            // root->left = deleteNode(root->left, maxVal);
+            // return root;
+
+            //Succesor way
+            //to find root ka just bada element
+            int minVal = getMin(root->right);
+            root->val = minVal;
+            root->right = deleteNode(root->right, minVal);
             return root;
-            
-            //Similarly, we can also use the successor
-            //Successor
-            //target node ke right subtree ka minimum element
-            //int rightMin = getMin(root->right);
-            //root->right = deleteNode(root->right, rightMin);
-            //root->data = rightMin;
-            //return root;
         }
+       }
+       else //Not match
+       {
+            if(key < root->val)
+            {
+                root->left = deleteNode(root->left, key);
+            }
+            if(key > root->val)
+            {
+                root->right = deleteNode(root->right, key);
+            }
+            return root;
+       }
+       return NULL;
     }
-    else
-    {
-        if(target < root->data)
-        {
-            root->left = deleteNode(root->left, target);
-        }
-        else //target > root->data
-        {   
-            root->right = deleteNode(root->right, target);
-        }
-    }
-    return root;
-}
-
-
-int main()
-{
-    Node* root = NULL;
-    createTree(root);
-    levelOrderTraversal(root);
-    cout<<endl;
-    int target;
-    cout<<"Enter the element to be deleted: "<<endl;
-    cin>>target;
-    while(target != -1)
-    {
-        root = deleteNode(root, target);
-        levelOrderTraversal(root);
-        cout<<endl;
-        cout<<"Enter the element to be deleted: "<<endl;
-        cin>>target;
-    }
-    return 0;
-}
-
-//Input: 100 90 500 80 400 70 85 300 450 470 -1
-//LeetCode 450. Delete Node in a BST - https://leetcode.com/problems/delete-node-in-a-bst/
+};

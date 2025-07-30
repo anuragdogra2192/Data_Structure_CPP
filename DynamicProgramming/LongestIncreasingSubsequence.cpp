@@ -121,6 +121,29 @@ public:
         return dp[0][-1+1];//same input as recur ke startintg args ke tarah
     }
 
+    //Dp and binary search - Bottom UP approach
+    //time Complexity: O(n log n);
+    int solveDPAndBS(vector<int>& nums)
+    {
+        vector<int>ans;//dp
+        ans.push_back(nums[0]);
+
+        for(int i=1; i<nums.size(); i++)
+        {
+            if(nums[i] > ans.back())
+            {
+                ans.push_back(nums[i]);
+            }
+            else
+            {//find the index of the just >= the ith element.
+                auto it = lower_bound(ans.begin(), ans.end(), nums[i]);
+                int index = it - ans.begin();
+                ans[index] = nums[i]; 
+            }
+        }
+        return ans.size();
+    }
+
     int lengthOfLIS(vector<int>& nums) {
         int prev = -1;
         int curr = 0;
@@ -128,8 +151,9 @@ public:
         //return solveUsingRec(nums, curr, prev);
         //Step 1: create the dp, 2D (n+1) * (n+1) size
         //Observation jo ham bhul gaye the,  prev hamesha curr se peeche rahne wala hai
-        vector<vector<int>> dp(n+1, vector<int>(n+1, -1));
+        //vector<vector<int>> dp(n+1, vector<int>(n+1, -1));
         //return solveUsingRecMem(nums, curr, prev, dp);
-        return solveUsingTab(nums, curr, prev);
+        //return solveUsingTab(nums, curr, prev);
+        return solveDPAndBS(nums);
     }
 };

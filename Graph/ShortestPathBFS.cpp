@@ -79,37 +79,6 @@ class Graph
         }
         cout<<endl;
     }
-
-    void topoSortDFS(int src, unordered_map<int, bool>& visited, stack<int>& ans)
-    {
-        visited[src] = true;
-        for(auto nbr : adjList[src])
-        {
-            if(!visited[nbr])
-            {
-                topoSortDFS(nbr, visited, ans); 
-            }
-        }
-        //backtrack
-        ans.push(src);
-    }
-    //Directed Acyclic Graph
-    void shortestPathDFS(int src)
-    {
-        stack<int> topoOrder;
-        unordered_map<int, bool> vis;
-        topoSortDFS(src, vis, topoOrder);
-
-        int n = topoOrder.size();
-        vector<int> dist(n, INT_MAX);
-        //Initial State Maintian
-        dist[src] = 0;
-        //And src ke neighbour ke dist update karte ho
-        for(auto nbr : adjList[src])
-        {
-            
-        }
-    }
 };
 
 int main()

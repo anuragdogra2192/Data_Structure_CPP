@@ -35,7 +35,7 @@ class Graph
 
     //Single Source Shotest path (SSSP)
     //Directed and Undirected Graph
-    //Can detect for -ve weights.
+    //Can detect -ve cycles.
     //Time Complexity O(N)(N-1)
 
     void BellmanFordAlgo(int src, int n)

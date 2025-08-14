@@ -35,7 +35,7 @@ class Graph
     //Shotest path
     //Directed and Undirected Graph
     //Cannot work for -ve weights.
-    void sortestDistanceDijkstra(int src, int n)
+    void shortestDistanceDijkstra(int src, int n)
     {
         vector<int> dist(n+1, INT_MAX);
         set<pair<int, int> > st;
@@ -104,7 +104,7 @@ int main()
     
     int V = 6;
     
-    g.sortestDistanceDijkstra(0, V);
+    g.shortestDistanceDijkstra(0, V);
 
     return 0;
 }

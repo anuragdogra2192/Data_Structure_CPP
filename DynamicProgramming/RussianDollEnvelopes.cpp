@@ -1,6 +1,8 @@
 /* Leet code 354.
 
 354. Russian Doll Envelopes
+Prequisite: Longest Increasing SubSequence(LIS)
+Interview question.
 
 You are given a 2D array of integers envelopes where envelopes[i] = [wi, hi] represents 
 the width and the height of an envelope.

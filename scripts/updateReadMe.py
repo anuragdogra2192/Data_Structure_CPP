@@ -44,6 +44,8 @@ Resources: LeetCode, GeeksForGeeks and HackerRank etc.
 ### Live Medal
 [<img src="{leetcode_medal_img_url}" alt="LeetCode Medal" height="90" />]({leetcode_medal_page_url})
 
+### License
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 ## How to Use
 
 - Browse by topic folder.

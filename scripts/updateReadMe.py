@@ -78,29 +78,49 @@ def discover_topics(root: Path):
         topics.append(p)
     return topics
 
-def svg_bar(pct: float, label: str) -> str:
-    pct = max(0, min(100, pct))
-    filled = int(BAR_WIDTH * pct / 100.0)
-    return (
-        f'<svg width="{BAR_WIDTH}" height="{BAR_HEIGHT}" '
-        f'xmlns="http://www.w3.org/2000/svg" role="img" aria-label="{label}">'
-        f'<rect x="0" y="0" width="{BAR_WIDTH}" height="{BAR_HEIGHT}" rx="4" ry="4" fill="#e5e7eb"/>'
-        f'<rect x="0" y="0" width="{filled}" height="{BAR_HEIGHT}" rx="4" ry="4" fill="#22c55e"/>'
-        f"</svg>"
-    )
+# ----- new: save bars as SVG files so GitHub renders them -----
 
-def build_table(rows):
+def slugify(name: str) -> str:
+    s = name.strip().replace(" ", "_")
+    s = re.sub(r"[^A-Za-z0-9_\-]", "-", s)
+    return s[:80]
+
+def ensure_dir(d: Path):
+    d.mkdir(parents=True, exist_ok=True)
+
+def write_bar_svg(pct: float, label: str, out_path: Path):
+    pct = max(0.0, min(100.0, pct))
+    filled = int(BAR_WIDTH * pct / 100.0)
+    svg = f"""<svg width="{BAR_WIDTH}" height="{BAR_HEIGHT}" viewBox="0 0 {BAR_WIDTH} {BAR_HEIGHT}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="{label}">
+  <title>{label}</title>
+  <rect x="0" y="0" width="{BAR_WIDTH}" height="{BAR_HEIGHT}" rx="4" ry="4" fill="#e5e7eb"/>
+  <rect x="0" y="0" width="{filled}" height="{BAR_HEIGHT}" rx="4" ry="4" fill="#22c55e"/>
+</svg>
+"""
+    out_path.write_text(svg, encoding="utf-8")
+
+def build_table(rows, assets_dir: Path):
+    ensure_dir(assets_dir)
     total = sum(c for _, c in rows)
+    max_count = max((c for _, c in rows), default=1)  # safe if rows empty
+
     md = []
     md.append("## Problems per Topic\n")
     md.append(f"**Total solved:** {total}\n\n")
     md.append("| Topic | Problems | Progress |\n|---|---:|:--|\n")
-    max_count = max(1, max(c for _, c in rows))
+
     for topic, count in rows:
         pct = 100.0 * count / max_count if max_count else 0.0
-        bar = svg_bar(pct, f"{topic}: {count} problems ({pct:.0f}%)")
-        md.append(f"| `{topic}` | **{count}** | {bar} |\n")
+        label = f"{topic}: {count} problems ({pct:.0f}%)"
+        fname = f"{slugify(topic)}.svg"
+        out_path = assets_dir / fname
+        write_bar_svg(pct, label, out_path)
+        img_md = f"![{label}](assets/bars/{fname})"
+        md.append(f"| `{topic}` | **{count}** | {img_md} |\n")
+
     return "".join(md)
+
+# -------------------------------------------------------------
 
 def write_full_readme(section_md: str, readme: Path):
     content = README_TEMPLATE.format(
@@ -115,6 +135,8 @@ def write_full_readme(section_md: str, readme: Path):
 def main():
     root = repo_root()
     readme = root / "README.md"
+    bars_dir = root / "assets" / "bars"
+
     topics = discover_topics(root)
     rows = [(t.name, count_files(t)) for t in topics]
     rows = [(name, cnt) for name, cnt in rows if cnt > 0]
@@ -124,9 +146,9 @@ def main():
     else:
         rows.sort(key=lambda x: (-x[1], x[0].lower()))
 
-    section_md = build_table(rows)
+    section_md = build_table(rows, bars_dir)
     write_full_readme(section_md, readme)
-    print("README created ✅")
+    print("README created ✅ (with visible SVG bars)")
 
 if __name__ == "__main__":
     main()

@@ -138,7 +138,6 @@ public:
     {
         int n = nums.size();
         //step 1: create a dp array, type: 1D dp, of size (n+1)
-        vector<int> dp(n+2, -1);//n+2 for i+2 and i+1
         //step2: analyse base cases and update dp array
         int next1 = 0;
         int next2 = 0;

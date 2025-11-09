@@ -4,7 +4,8 @@
 
 A curated collection of C++ questions & solutions for classic Data Structure and Algorithm problems.  
 Organized by topic for easy navigation and learning.
-Resources: LeetCode, GeeksForGeeks and HackerRank etc.
+Resources: LeetCode, GeeksForGeeks, CodeHelp, SPOJ and HackerRank etc.
+
 - 📚 **Topics:** Arrays, Strings, Linked Lists, Trees, Graphs, Heaps, Maps, Tries, and more!
 - 📝 **Each folder** contains well-commented `.cpp` solutions.
 - 🚀 **Auto-generated progress table** below.
@@ -13,12 +14,12 @@ Resources: LeetCode, GeeksForGeeks and HackerRank etc.
 <!-- auto-generated: do not edit manually -->
 
 ## Problems per Topic
-**Total solved:** 435
+**Total solved:** 439
 
 | Topic | Problems | Progress |
 |---|---:|:--|
+| `DynamicProgramming` | **40** | ![DynamicProgramming: 40 problems (100%)](assets/bars/DynamicProgramming.svg) |
 | `Recursion` | **40** | ![Recursion: 40 problems (100%)](assets/bars/Recursion.svg) |
-| `DynamicProgramming` | **37** | ![DynamicProgramming: 37 problems (92%)](assets/bars/DynamicProgramming.svg) |
 | `Stack` | **37** | ![Stack: 37 problems (92%)](assets/bars/Stack.svg) |
 | `BinaryTrees` | **34** | ![BinaryTrees: 34 problems (85%)](assets/bars/BinaryTrees.svg) |
 | `CharArraysAndStrings` | **31** | ![CharArraysAndStrings: 31 problems (78%)](assets/bars/CharArraysAndStrings.svg) |
@@ -35,6 +36,7 @@ Resources: LeetCode, GeeksForGeeks and HackerRank etc.
 | `OOPsConcepts` | **16** | ![OOPsConcepts: 16 problems (40%)](assets/bars/OOPsConcepts.svg) |
 | `Sorting` | **4** | ![Sorting: 4 problems (10%)](assets/bars/Sorting.svg) |
 | `BasicMathsAndPointers` | **1** | ![BasicMathsAndPointers: 1 problems (2%)](assets/bars/BasicMathsAndPointers.svg) |
+| `GreedyAlgorithms` | **1** | ![GreedyAlgorithms: 1 problems (2%)](assets/bars/GreedyAlgorithms.svg) |
 
 
 <!-- PROBLEMS_PER_TOPIC:END -->
